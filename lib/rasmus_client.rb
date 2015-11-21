@@ -19,12 +19,20 @@ class RasmusClient
     request(command: 'write', path: path, input: data, mode: mode)
   end
 
+  def write_async(path, mode, data)
+    request(command: 'write', path: path, input: data, mode: mode, async: true)
+  end
+
   def list(path)
     request(command: 'list', path: path)
   end
   
   def execute(cmd, input, *params)
     request(command: 'execute', path: cmd, input: input, params: params)
+  end
+
+  def async_execute(cmd, input, *params)
+    request(command: 'execute', async: true, path: cmd, input: input, params: params)
   end
 
   def request(args={})
